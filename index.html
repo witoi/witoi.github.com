@@ -5,7 +5,39 @@
   </head>
   <body>
     <h1>Witoi's Github Page</h1>
-    <p>Why not?</p>
+    <h2>Public Repos</h2>
+    <ul id="public-repos">
+    </ul>
+    <h2>Forks</h2>
+    <ul id="fork-repos">
+    </ul>
+    <script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var repos_endpoint = 'https://api.github.com/orgs/witoi/repos' ;
+      jQuery(function($) {
+        var $public_repos = $('#public-repos')
+          , $forks_repos = $('#fork-repos')
+        $.get(repos_endpoint, {type: 'member'}, function(json) {
+          $.each(json, function(index, repo) {
+            if (!repo.fork) {
+              $public_repos.append(tmpl('owned-repo', repo))
+            } else {
+              $forks_repos.append(tmpl('owned-repo', repo))
+            }
+          })
+        })
+      })
+    </script>
+    <script type="text/x-tmpl" id="owned-repo">
+      <li id="repo-{%= o.name %}">
+        <h3>
+          <a href="{%= o.homepage %}">{%= o.name %}</a>
+        </h3>
+        <p>{%= o.description %}</p>
+        <h4><a href="{%= o.html_url %}">Code</h4>
+      </li>
+    </script>
   </body>
 </html>
 
