@@ -30,13 +30,13 @@
       })
     </script>
     <script type="text/x-tmpl" id="owned-repo">
-      <li id="repo-{%= o.name %}">
+      <div id="repo-{%= o.name %}" class="repo {%= o.language %}">
         <h3>
           <a href="{%= o.homepage %}">{%= o.name %}</a>
         </h3>
         <p>{%= o.description %}</p>
-        <h4><a href="{%= o.html_url %}">Code</h4>
-      </li>
+        <h4><a href="{%= o.html_url %}">{%= o.language %}</h4>
+      </div>
     </script>
     <script type="text/javascript">
       var _gaq = _gaq || [];
